@@ -82,6 +82,26 @@ class Superhero:
         print(f"{self} attacks {other} and deals {damage} damage!")
         other.lose_health(damage)
 
+
+def battle(superhero1, superhero2):
+
+    print(f"{superhero1} vs. {superhero2}! Let the battle begin!")
+    current_turn = 1
+    while not superhero1.is_dead and not superhero2.is_dead:
+        print(f"Round {current_turn}!")
+        attacker = superhero1 if current_turn % 2 == 1 else superhero2
+        defender = superhero2 if current_turn % 2 == 1 else superhero1
+        attacker.attack(defender)
+        current_turn += 1
+    winner = superhero1 if superhero2.is_dead else superhero2
+    loser = superhero1 if superhero2.is_dead is False else superhero2
+    print(f"{winner} wins!")
+    print(f"{loser} lost")
+
+    winner.gain_health()
+    loser.revive()
+    loser.gain_health()
+
 #The type of superhero is defined, its fortress and debility
 
 arachnid_type = SuperheroType ("Arachnid", strengths=["Magic" , "Fast"], weaknesses=["Thunder" , "Bat"])
